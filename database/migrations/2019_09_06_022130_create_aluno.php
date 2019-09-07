@@ -19,6 +19,7 @@ class CreateAluno extends Migration
             $table->string('cpf', 15)->unique();
             $table->date('data_nascimento')->nullable();
             $table->string('email', 45);
+            $table->string('celular', 15);
             $table->string('cep', 9);
             $table->string('uf', 2);
             $table->string('cidade', 45);

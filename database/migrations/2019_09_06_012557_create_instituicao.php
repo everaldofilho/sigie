@@ -18,7 +18,6 @@ class CreateInstituicao extends Migration
             $table->string('nome', 50);
             $table->string('cnpj', 20)->unique();
             $table->tinyInteger('status');
-            $table->timestamps();
         });
     }
 

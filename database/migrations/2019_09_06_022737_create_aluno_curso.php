@@ -18,8 +18,8 @@ class CreateAlunoCurso extends Migration
             $table->integer('id_aluno')->index();
             $table->integer('id_curso')->index();
             $table->date('dt_inicio')->index();
-            $table->date('dt_termino')->index();
-            $table->date('dt_cancelamento')->index();
+            $table->date('dt_termino')->nullable()->index();
+            $table->date('dt_cancelamento')->nullable()->index();
             $table->tinyInteger('status');
         });
     }
