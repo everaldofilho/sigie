@@ -137,7 +137,7 @@ class AlunoController extends Controller
             'celular' => 'required|max:15',
             'email' => 'required|email|max:45',
             'endereco' => 'required|max:80',
-            'numero' => 'required|numeric|max:10',
+            'numero' => 'required|numeric',
             'bairro' => 'required|max:60',
             'cidade' => 'required|max:60',
             'uf' => 'required|max:2',
