@@ -8,13 +8,9 @@
   <meta charset="UTF-8">
   <meta href="{{ URL::to('/') }}" />
   <link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
-  <title>Test PRAVALER - @yield('title')</title>
+  <title>Test PRAVALER</title>
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -26,7 +22,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-cube"></i>
         </div>
@@ -38,10 +34,10 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-      <li class="nav-item active">
-        <a class="nav-link" href="">
+      <li class="nav-item {{ (request()->is('dashboard*')) ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('home') }}">
           <i class="fas fa-tachometer-alt"></i>
-          <span>DASHBOARD</span>
+          <span>Dashboard</span>
         </a>
       </li>
       <!-- Heading -->
@@ -50,20 +46,20 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
-        <a class="nav-link" href="">
+      <li class="nav-item {{ (request()->is('aluno*')) ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('aluno.index') }}">
           <i class="fas fa-users"></i>
           <span>Alunos</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
+      <li class="nav-item {{ (request()->is('curso*')) ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('curso.index') }}">
           <i class="fas fa-book-reader"></i>
           <span>Cursos</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
+      <li class="nav-item {{ (request()->is('instituicao*')) ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('instituicao.index') }}">
           <i class="fas fa-university"></i>
           <span>Instituições</span>
         </a>
@@ -93,8 +89,23 @@
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow pt-4">
-              @yield('botao')
+            <li class="nav-item dropdown no-arrow d-none d-sm-block">
+              <div class="nav-link ">
+                @yield('botao')
+              </div>
+            </li>
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <li class="nav-item dropdown no-arrow">
+              <form class="nav-link" action="{{ route('session.instituicao') }}" method="post">
+                @csrf
+                <select class="custom-select input-sm" name="id" onchange="this.form.submit()">
+                  @foreach(App\Models\Instituicao::all() as $instituicao)
+                  <option value="{{$instituicao->id}}" {{ session()->get('instituicao') == $instituicao->id ? 'selected' : '' }}>{{$instituicao->nome}}</option>
+                  @endforeach
+                </select>
+              </form>
             </li>
 
             <div class="topbar-divider d-none d-sm-block"></div>
@@ -109,7 +120,7 @@
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="logout" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Sair
                 </a>
               </div>
             </li>
@@ -148,7 +159,7 @@
             <strong>{{ $message }}</strong>
           </div>
           @endif
-          @if ($errors->any())
+          @if (isset($errors) && $errors->any())
           <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <ul class="mb-0">
@@ -185,25 +196,7 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  
   <!-- Custom scripts for all pages-->
   <script src="{{ asset('js/app.js') }}"></script>
 </body>
