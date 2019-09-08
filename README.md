@@ -4,7 +4,8 @@ Sistema de Informações para Gestão de Instituição de Ensino
 ![Apresentação do projeto](doc/apresentacao.gif)
 
 ## Modelo de Entidades e Relacionamentos (MER)
-![Apresentação do projeto](doc/MER.png)
+
+![Apresentação do projeto](doc/mer.png)
 
 ## Ferramentas Utilizadas
 - Template: [SB Admin 2](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2)
