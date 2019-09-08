@@ -8,9 +8,9 @@ use Faker\Generator as Faker;
 
 $factory->define(AlunoCurso::class, function (Faker $faker) {
     $status = $faker->randomElement([0, 1, 2]);
-    $dt_inicio = $faker->date();
-    $dt_cancelamento = $status === 2 ? $faker->dateTimeBetween($dt_inicio) : null;
-    $dt_termino = $status === 0 ? $faker->dateTimeBetween($dt_inicio) : null;
+    $dt_inicio = $faker->dateTimeBetween('-1 years');
+    $dt_cancelamento = $status === 0 ? $faker->dateTimeBetween($dt_inicio) : null;
+    $dt_termino = $status === 2 ? $faker->dateTimeBetween($dt_inicio) : null;
 
     return [
         'id_curso' => Curso::all()->random(1)->first()->id,

@@ -9,10 +9,11 @@ $factory->define(Curso::class, function (Faker $faker) {
     return [
         'id_instituicao' => 1,
         'nome' => $faker->randomElement([
-            'Administração',
-            'Informática',
-            'Inglês',
-            'Web design'
+            'Curso A',
+            'Curso B',
+            'Curso C',
+            'Curso D',
+            'Curso 3',
         ]),
         'duracao' => $faker->randomElement([
             '1 Ano',
