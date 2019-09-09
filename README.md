@@ -94,7 +94,7 @@ MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
     docker-compose exec app php composer.phar install
     ````
 - Subindo banco de dados junto com os dados fake
-    `````
+    ````
     docker-compose exec app php artisan migrate:fresh --seed
     ````
 
