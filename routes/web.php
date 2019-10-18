@@ -12,7 +12,7 @@
 */
 
 Route::get('/dashboard', 'DashboardController@index')->name('home');
-
+Route::get('/login', 'AuthFakeController@authenticate');
 Route::post('session/instituicao', 'SessionController@instituicao')->name('session.instituicao');
 
 Route::resource('aluno', 'AlunoController');
